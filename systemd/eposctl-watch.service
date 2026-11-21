@@ -1,0 +1,14 @@
+[Unit]
+Description=EPOS H3PRO Hybrid HID Event & Chime Watcher (eposctl)
+After=pipewire.service pipewire-pulse.service
+Wants=pipewire.service pipewire-pulse.service
+
+[Service]
+Type=simple
+Environment=PYTHONUNBUFFERED=1
+ExecStart=%h/.local/bin/eposctl watch
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=default.target

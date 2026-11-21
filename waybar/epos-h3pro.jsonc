@@ -1,0 +1,25 @@
+// Ready-to-paste Waybar module for EPOS H3PRO Hybrid (`eposctl`)
+// Add "custom/epos" to your modules-right / modules-left array in ~/.config/waybar/config.jsonc
+{
+  "custom/epos": {
+    "exec": "eposctl status --json",
+    "return-type": "json",
+    "interval": 5,
+    "format": "{}",
+    "tooltip": true,
+    // Left-click: open interactive TUI in a terminal (adjust terminal emulator as needed)
+    "on-click": "kitty -e eposctl tui",
+    // Middle-click: cycle PipeWire EQ between esports and off
+    "on-click-middle": "eposctl eq esports",
+    // Right-click: disable PipeWire EQ (direct hardware output)
+    "on-click-right": "eposctl eq off"
+  }
+}
+
+/* Optional ~/.config/waybar/style.css rules:
+#custom-epos.disconnected { opacity: 0.5; }
+#custom-epos.charging     { color: #a6e3a1; }
+#custom-epos.warning      { color: #f9e2af; }
+#custom-epos.critical     { color: #f38ba8; font-weight: bold; }
+#custom-epos.anc-on       { border-bottom: 2px solid #89b4fa; }
+*/

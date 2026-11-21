@@ -1,0 +1,20 @@
+# EPOS H3PRO Hybrid (DSEA A/S, VID 0x1395)
+# Grants non-root user access to vendor HID (hidraw) and USB control nodes.
+#
+# IMPORTANT: The filename prefix MUST be < 73 (e.g. 70-epos-h3pro.rules) so that
+# systemd's 73-seat-late.rules applies the TAG+="uaccess" ACL for the active user.
+#
+# Install:
+#   sudo cp udev/70-epos-h3pro.rules /etc/udev/rules.d/
+#   sudo udevadm control --reload-rules
+#   sudo udevadm trigger --subsystem-match=hidraw
+
+# EPOS H3PRO Hybrid (Wired USB, PID 0x0101) - hidraw
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1395", ATTRS{idProduct}=="0101", MODE="0660", GROUP="input", TAG+="uaccess"
+
+# EPOS H3PRO Hybrid (Wireless Dongle GSA 70, PID 0x0303) - hidraw
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1395", ATTRS{idProduct}=="0303", MODE="0660", GROUP="input", TAG+="uaccess"
+
+# Direct USB device access (optional, for libusb/hidapi-libusb fallback)
+SUBSYSTEM=="usb", ATTR{idVendor}=="1395", ATTR{idProduct}=="0101", MODE="0660", GROUP="input", TAG+="uaccess"
+SUBSYSTEM=="usb", ATTR{idVendor}=="1395", ATTR{idProduct}=="0303", MODE="0660", GROUP="input", TAG+="uaccess"
