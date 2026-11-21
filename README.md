@@ -35,17 +35,25 @@ ls -l /dev/hidraw*
 
 ### 2. Install `eposctl`
 
-Using [`uv`](https://docs.astral.sh/uv/):
+**One-line install:**
+```bash
+curl -fsSL https://raw.githubusercontent.com/Rutytoi220/eposctl/main/install.sh | bash
+```
+
+**Or via `uv` / `pipx` directly from GitHub:**
+```bash
+uv tool install git+https://github.com/Rutytoi220/eposctl
+# or
+pipx install git+https://github.com/Rutytoi220/eposctl
+```
+
+Pre-built wheels and source tarballs are also available on **[GitHub Releases](https://github.com/Rutytoi220/eposctl/releases)**.
+
+For local development with [`uv`](https://docs.astral.sh/uv/):
 
 ```bash
 uv sync --extra dev
 uv run eposctl --help
-```
-
-Or install globally as an editable CLI tool:
-
-```bash
-uv tool install --editable .
 ```
 
 ### 3. PipeWire EQ Profiles (Optional Pre-Load)
